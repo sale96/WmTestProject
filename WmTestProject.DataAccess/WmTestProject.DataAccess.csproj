@@ -17,4 +17,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WmTestProject.Domain\WmTestProject.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
