@@ -24,7 +24,7 @@ namespace WmTestProject.Implementation.Queries.Product
             //TODO: Use automapper
             var query = _context.Products.AsQueryable();
 
-            if (!String.IsNullOrEmpty(search) || !String.IsNullOrWhiteSpace(search))
+            if (!(string.IsNullOrEmpty(search) || string.IsNullOrWhiteSpace(search)))
             {
                 query = query.Where(p => p.Name.Contains(search));
             }
