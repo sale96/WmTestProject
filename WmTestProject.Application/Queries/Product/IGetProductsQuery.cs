@@ -5,7 +5,7 @@ using WmTestProject.Application.Dto;
 
 namespace WmTestProject.Application.Queries.Product
 {
-    public interface IGetProductsQuery : IQuery<string, ProductDto>
+    public interface IGetProductsQuery : IQuery<string, IReadOnlyList<ProductDto>>
     {
     }
 }
