@@ -9,12 +9,15 @@ namespace WmTestProject.DataAccess
 {
     public class WmTestContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
+        public WmTestContext(DbContextOptions<WmTestContext> options) : base(options)
+        {
+        }
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
         {
             optionBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=WmTest;Integrated Security=True;");
 
             base.OnConfiguring(optionBuilder);
-        }
+        }*/
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
