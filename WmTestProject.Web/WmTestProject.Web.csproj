@@ -4,4 +4,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WmTestProject.Application\WmTestProject.Application.csproj" />
+    <ProjectReference Include="..\WmTestProject.DataAccess\WmTestProject.DataAccess.csproj" />
+    <ProjectReference Include="..\WmTestProject.Domain\WmTestProject.Domain.csproj" />
+    <ProjectReference Include="..\WmTestProject.Implementation\WmTestProject.Implementation.csproj" />
+  </ItemGroup>
+
 </Project>
