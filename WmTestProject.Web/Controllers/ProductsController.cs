@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WmTestProject.Application.Queries.Product;
+using WmTestProject.Application.Searches.Product;
 
 namespace WmTestProject.Web.Controllers
 {
@@ -16,7 +17,7 @@ namespace WmTestProject.Web.Controllers
             _query = query;
         }
 
-        public IActionResult Index(string search)
+        public IActionResult Index(ProductSearchParams search)
         {
             return View(_query.Execute(search));
         }
