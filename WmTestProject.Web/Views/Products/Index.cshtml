@@ -1,5 +1,26 @@
 ﻿@model IEnumerable<WmTestProject.Application.Dto.ProductDto>
 
+<div class="row">
+    <div class="col-6">
+        <h4>Sort</h4>
+        <form class="form-inline mb-3" asp-action="Index">
+            <select class="form-control" name="order">
+                <option value="0">Name Ascending</option>
+                <option value="1">Name Descending</option>
+            </select>
+            <button class="btn btn-secondary">Sort</button>
+        </form>
+    </div>
+    <div class="col-6">
+        <h4>Search</h4>
+        <form class="form-inline mb-3" asp-action="Index">
+            <label class="sr-only">Search</label>
+            <input type="text" name="name" class="form-control" />
+            <button class="btn btn-secondary">Search</button>
+        </form>
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
