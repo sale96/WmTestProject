@@ -19,6 +19,8 @@ namespace WmTestProject.DataAccess
             modelBuilder.ApplyConfiguration(new ManufacturerConfiguration());
             modelBuilder.ApplyConfiguration(new SupplierConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
+
+            modelBuilder.Seed();
         }
 
         public override int SaveChanges()
