@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WmTestProject.DataAccess.Configurations;
 using WmTestProject.Domain.Entities;
 
 namespace WmTestProject.DataAccess
@@ -17,20 +18,10 @@ namespace WmTestProject.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>()
-                .HasOne(p => p.Category)
-                .WithMany(c => c.Products)
-                .HasForeignKey(p => p.CategoryId);
-
-            modelBuilder.Entity<Product>()
-                .HasOne(p => p.Supplier)
-                .WithMany(s => s.Products)
-                .HasForeignKey(p => p.SupplierId);
-
-            modelBuilder.Entity<Product>()
-                .HasOne(p => p.Manufacturer)
-                .WithMany(m => m.Products)
-                .HasForeignKey(p => p.ManufacturerId);
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ManufacturerConfiguration());
+            modelBuilder.ApplyConfiguration(new SupplierConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
         }
 
         public DbSet<Category> Categories { get; set; }
