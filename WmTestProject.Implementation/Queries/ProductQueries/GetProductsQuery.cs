@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +9,20 @@ using WmTestProject.Application.Queries.Product;
 using WmTestProject.Application.Searches;
 using WmTestProject.Application.Searches.Product;
 using WmTestProject.DataAccess;
+using WmTestProject.Domain.Entities;
 
-namespace WmTestProject.Implementation.Queries.Product
+namespace WmTestProject.Implementation.Queries.ProductQueries
 {
     public class GetProductsQuery : IGetProductsQuery
     {
         private readonly WmTestContext _context;
-        public GetProductsQuery(WmTestContext context)
+        private readonly IMapper _mapper;
+        public GetProductsQuery(
+            WmTestContext context,
+            IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public string Name => typeof(GetProductsQuery).Name;
@@ -42,16 +48,7 @@ namespace WmTestProject.Implementation.Queries.Product
                 .Include(p => p.Manufacturer)
                 .Include(p => p.Supplier);
 
-            return query.Select(x => new ProductDto
-            {
-                Id= x.Id,
-                Name = x.Name,
-                Description = x.Description,
-                Price = x.Price,
-                Category = x.Category.Name,
-                Manufacturer = x.Manufacturer.Name,
-                Supplier = x.Supplier.Name
-            }).ToList();
+            return _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDto>>(query.ToList());
         }
     }
 }

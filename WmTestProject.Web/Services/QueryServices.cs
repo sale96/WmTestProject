@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WmTestProject.Application.Queries.Product;
-using WmTestProject.Implementation.Queries.Product;
+using WmTestProject.Implementation.Queries.ProductQueries;
 
 namespace WmTestProject.Web.Services
 {
