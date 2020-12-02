@@ -7,5 +7,6 @@ namespace WmTestProject.Domain.Entities
     public class Manufacturer : BaseEntity
     {
         public string Name { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }
