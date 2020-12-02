@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\WmTestProject.Application\WmTestProject.Application.csproj" />
     <ProjectReference Include="..\WmTestProject.DataAccess\WmTestProject.DataAccess.csproj" />
     <ProjectReference Include="..\WmTestProject.Domain\WmTestProject.Domain.csproj" />
