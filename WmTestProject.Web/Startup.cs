@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WmTestProject.DataAccess;
+using WmTestProject.Implementation.MappingProfiles;
 using WmTestProject.Web.Services;
 
 namespace WmTestProject.Web
@@ -31,6 +33,11 @@ namespace WmTestProject.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly(typeof(WmTestContext).Assembly.FullName));
+            });
+
+            services.AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<ProductProfile>();
             });
 
             services.RegisterQueries();
