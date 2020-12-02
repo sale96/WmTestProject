@@ -35,6 +35,7 @@ namespace WmTestProject.Implementation.Queries.Product
 
             return query.Select(x => new ProductDto
             {
+                Id= x.Id,
                 Name = x.Name,
                 Description = x.Description,
                 Price = x.Price,
