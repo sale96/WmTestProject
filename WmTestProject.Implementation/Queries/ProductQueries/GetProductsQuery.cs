@@ -29,7 +29,6 @@ namespace WmTestProject.Implementation.Queries.ProductQueries
 
         public IReadOnlyList<ProductDto> Execute(ProductSearchParams search)
         {
-            //TODO: Use automapper
             var query = _context.Products.AsQueryable();
 
             if (!(string.IsNullOrEmpty(search.Name) || string.IsNullOrWhiteSpace(search.Name)))
