@@ -7,14 +7,15 @@ using WmTestProject.Application.Queries.Product;
 using WmTestProject.Application.Searches;
 using WmTestProject.Application.Searches.Product;
 using WmTestProject.DataAccess;
+using WmTestProject.DataAccess.JsonContext.Interfaces.Implementations;
 
 namespace WmTestProject.Implementation.Queries.ProductQueries
 {
     public class GetProductsJsonQuery : IGetProductsJsonQuery
     {
-        private readonly IJsonContext _context;
+        private readonly IJsonProductContext _context;
 
-        public GetProductsJsonQuery(IJsonContext context)
+        public GetProductsJsonQuery(IJsonProductContext context)
         {
             _context = context;
         }
@@ -23,7 +24,7 @@ namespace WmTestProject.Implementation.Queries.ProductQueries
 
         public IReadOnlyList<ProductDto> Execute(ProductSearchParams search)
         {
-            var data = _context.Read<ProductDto>();
+            var data = _context.Read();
 
             if (!(string.IsNullOrEmpty(search.Name) || string.IsNullOrWhiteSpace(search.Name)))
             {

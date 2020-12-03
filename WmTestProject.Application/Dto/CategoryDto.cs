@@ -6,6 +6,6 @@ namespace WmTestProject.Application.Dto
 {
     public class CategoryDto : BaseDto
     {
-        public int Name { get; set; }
+        public string Name { get; set; }
     }
 }

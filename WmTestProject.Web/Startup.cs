@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WmTestProject.DataAccess;
+using WmTestProject.DataAccess.JsonContext;
+using WmTestProject.DataAccess.JsonContext.Interfaces.Implementations;
 using WmTestProject.Implementation.MappingProfiles;
 using WmTestProject.Web.Services;
 
@@ -35,7 +37,7 @@ namespace WmTestProject.Web
                     b => b.MigrationsAssembly(typeof(WmTestContext).Assembly.FullName));
             });
 
-            services.AddTransient<IJsonContext, JsonContext>();
+            services.AddTransient<IJsonProductContext, JsonProductContext>();
 
             services.AddAutoMapper(cfg =>
             {

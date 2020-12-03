@@ -25,5 +25,7 @@ namespace WmTestProject.Web.Controllers
         {
             return View(_jsonQuery.Execute(search));
         }
+
+        public IActionResult Add() => View();
     }
 }
