@@ -6,6 +6,7 @@ using System.Text;
 using WmTestProject.Application.Commands.Product;
 using WmTestProject.Application.Dto;
 using WmTestProject.DataAccess;
+using WmTestProject.Domain.Entities;
 
 namespace WmTestProject.Implementation.Commands.ProductCommands
 {
@@ -27,6 +28,27 @@ namespace WmTestProject.Implementation.Commands.ProductCommands
 
         public void Execute(ProductDto request)
         {
+            var category = _context.Categories.FirstOrDefault(x => x.Name == request.Category);
+            var manufacturer = _context.Manufacturers.FirstOrDefault(x => x.Name == request.Manufacturer);
+            var supplier = _context.Suppliers.FirstOrDefault(x => x.Name == request.Supplier);
+
+            var exp = (category == null) || (manufacturer == null) || (supplier == null);
+
+            if (!exp)
+            {
+                var product = new Product
+                {
+                    Name = request.Name,
+                    Description = request.Description,
+                    Price = request.Price,
+                    CategoryId = category.Id,
+                    ManufacturerId = manufacturer.Id,
+                    SupplierId = supplier.Id
+                };
+
+                _context.Products.Add(product);
+                _context.SaveChanges();
+            }
         }
     }
 }
