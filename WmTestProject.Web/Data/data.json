@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Product 1",
+    "description": "Description 1234",
+    "price": 346,
+    "category": "Category1",
+    "manufacturer": "Manufacturer1",
+    "supplier": "Supplier1"
+  },
+  {
+    "id": 2,
+    "name": "Product 2",
+    "description": "Description 1234",
+    "price": 346,
+    "category": "Category2",
+    "manufacturer": "Manufacturer2",
+    "supplier": "Supplier2"
+  },
+  {
+    "id": 3,
+    "name": "Product 3",
+    "description": "Description 1234",
+    "price": 346,
+    "category": "Category3",
+    "manufacturer": "Manufacturer3",
+    "supplier": "Supplier3"
+  }
+]

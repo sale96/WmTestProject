@@ -11,15 +11,19 @@ namespace WmTestProject.Web.Controllers
     public class ProductsController : Controller
     {
         private readonly IGetProductsQuery _query;
+        private readonly IGetProductsJsonQuery _jsonQuery;
 
-        public ProductsController(IGetProductsQuery query)
+        public ProductsController(
+            IGetProductsQuery query,
+            IGetProductsJsonQuery jsonQuery)
         {
             _query = query;
+            _jsonQuery = jsonQuery;
         }
 
         public IActionResult Index(ProductSearchParams search)
         {
-            return View(_query.Execute(search));
+            return View(_jsonQuery.Execute(search));
         }
     }
 }

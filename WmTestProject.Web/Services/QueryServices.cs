@@ -12,7 +12,11 @@ namespace WmTestProject.Web.Services
     {
         public static IServiceCollection RegisterQueries(this IServiceCollection services)
         {
+            // EntityFramework
             services.AddTransient<IGetProductsQuery, GetProductsQuery>();
+
+            //Json
+            services.AddTransient<IGetProductsJsonQuery, GetProductsJsonQuery>();
 
             return services;
         }
