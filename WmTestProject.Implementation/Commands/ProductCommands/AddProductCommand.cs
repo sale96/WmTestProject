@@ -32,9 +32,9 @@ namespace WmTestProject.Implementation.Commands.ProductCommands
             var manufacturer = _context.Manufacturers.FirstOrDefault(x => x.Name == request.Manufacturer);
             var supplier = _context.Suppliers.FirstOrDefault(x => x.Name == request.Supplier);
 
-            var exp = (category == null) || (manufacturer == null) || (supplier == null);
+            var areNull = (category == null) || (manufacturer == null) || (supplier == null);
 
-            if (!exp)
+            if (!areNull)
             {
                 var product = new Product
                 {
