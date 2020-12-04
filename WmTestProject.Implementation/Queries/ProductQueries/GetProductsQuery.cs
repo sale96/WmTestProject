@@ -10,6 +10,7 @@ using WmTestProject.Application.Searches;
 using WmTestProject.Application.Searches.Product;
 using WmTestProject.DataAccess;
 using WmTestProject.Domain.Entities;
+using WmTestProject.Implementation.Utilities;
 
 namespace WmTestProject.Implementation.Queries.ProductQueries
 {
@@ -31,7 +32,7 @@ namespace WmTestProject.Implementation.Queries.ProductQueries
         {
             var query = _context.Products.AsQueryable();
 
-            if (!(string.IsNullOrEmpty(search.Name) || string.IsNullOrWhiteSpace(search.Name)))
+            if (!search.Name.IsTotalyEmpty())
             {
                 query = query.Where(p => p.Name.Contains(search.Name));
             }
