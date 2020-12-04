@@ -18,44 +18,33 @@ namespace WmTestProject.Web.Controllers
     {
         private readonly IGetProductsQuery _query;
         private readonly IGetProductsJsonQuery _jsonQuery;
+        private readonly IGetCategoriesQuery _categories;
+        private readonly IGetManufacturersQuery _manufacturers;
+        private readonly IGetSuppliersQuery _suppliers;
 
         public ProductsController(
             IGetProductsQuery query,
-            IGetProductsJsonQuery jsonQuery)
+            IGetProductsJsonQuery jsonQuery,
+            IGetCategoriesQuery categories,
+            IGetManufacturersQuery manufacturers,
+            IGetSuppliersQuery suppliers)
         {
             _query = query;
             _jsonQuery = jsonQuery;
+            _categories = categories;
+            _manufacturers = manufacturers;
+            _suppliers = suppliers;
         }
 
         public IActionResult Index(ProductSearchParams search)
         {
-            return View(_jsonQuery.Execute(search));
+            return View(_query.Execute(search));
         }
 
         [HttpGet]
-        public IActionResult Add(
-            [FromServices] IGetCategoriesQuery categories,
-            [FromServices] IGetManufacturersQuery manufacturers,
-            [FromServices] IGetSuppliersQuery suppliers)
+        public IActionResult Add()
         {
-            ViewBag.Categories = categories.Execute("").Select(x => new SelectListItem
-            {
-                Value = x.Name,
-                Text = x.Name
-            });
-
-            ViewBag.Manufacturers = manufacturers.Execute("").Select(x => new SelectListItem
-            {
-                Value = x.Name,
-                Text = x.Name
-            });
-
-            ViewBag.Suppliers = suppliers.Execute("").Select(x => new SelectListItem
-            {
-                Value = x.Name,
-                Text = x.Name
-            });
-
+            GenerateViewBags();
             return View();
         }
 
@@ -67,6 +56,7 @@ namespace WmTestProject.Web.Controllers
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Error in the model");
+                GenerateViewBags();
                 return View(product);
             }
 
@@ -79,7 +69,29 @@ namespace WmTestProject.Web.Controllers
             int id,
             [FromServices] IGetSingleProductQuery query)
         {
+            GenerateViewBags();
             return View(query.Execute(id));
+        }
+
+        private void GenerateViewBags()
+        {
+            ViewBag.Categories = _categories.Execute("").Select(x => new SelectListItem
+            {
+                Value = x.Name,
+                Text = x.Name
+            });
+
+            ViewBag.Manufacturers = _manufacturers.Execute("").Select(x => new SelectListItem
+            {
+                Value = x.Name,
+                Text = x.Name
+            });
+
+            ViewBag.Suppliers = _suppliers.Execute("").Select(x => new SelectListItem
+            {
+                Value = x.Name,
+                Text = x.Name
+            });
         }
     }
 }

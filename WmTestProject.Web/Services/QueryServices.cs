@@ -20,16 +20,17 @@ namespace WmTestProject.Web.Services
         {
             // EntityFramework
             services.AddTransient<IGetProductsQuery, GetProductsQuery>();
-            //services.AddTransient<IGetCategoriesQuery, GetCategoriesQuery>();
-            //services.AddTransient<IGetManufacturersQuery, GetManufacturersQuery>();
-            //services.AddTransient<IGetSuppliersQuery, GetSuppliersQuery>();
+            services.AddTransient<IGetCategoriesQuery, GetCategoriesQuery>();
+            services.AddTransient<IGetManufacturersQuery, GetManufacturersQuery>();
+            services.AddTransient<IGetSuppliersQuery, GetSuppliersQuery>();
+            services.AddTransient<IGetSingleProductQuery, GetSingleProductQuery>();
 
             //Json
             services.AddTransient<IGetProductsJsonQuery, GetProductsJsonQuery>();
-            services.AddTransient<IGetCategoriesQuery, GetCategoriesJsonQuery>();
-            services.AddTransient<IGetManufacturersQuery, GetManufacturerJsonQuery>();
-            services.AddTransient<IGetSuppliersQuery, GetSuppliersJsonQuery>();
-            services.AddTransient<IGetSingleProductQuery, GetSingleJsonProductQuery>();
+            //services.AddTransient<IGetCategoriesQuery, GetCategoriesJsonQuery>();
+            //services.AddTransient<IGetManufacturersQuery, GetManufacturerJsonQuery>();
+            //services.AddTransient<IGetSuppliersQuery, GetSuppliersJsonQuery>();
+            //services.AddTransient<IGetSingleProductQuery, GetSingleJsonProductQuery>();
 
             return services;
         }
