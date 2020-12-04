@@ -11,7 +11,14 @@ namespace WmTestProject.Implementation.MappingProfiles
 {
     public class ProductProfile : Profile
     {
+        private readonly WmTestContext _context;
+
         public ProductProfile(WmTestContext context)
+        {
+            _context = context;
+        }
+
+        public ProductProfile()
         {
             CreateMap<Product, ProductDto>()
                 .ForMember(dto => dto.Category, p => p.MapFrom(x => x.Category.Name))
@@ -20,11 +27,11 @@ namespace WmTestProject.Implementation.MappingProfiles
 
             CreateMap<ProductDto, Product>()
                 .ForMember(p => p.CategoryId, dto => dto.MapFrom(
-                    x => context.Categories.FirstOrDefault(m => m.Name == x.Category).Id))
+                    x => _context.Categories.FirstOrDefault(m => m.Name == x.Category).Id))
                 .ForMember(p => p.ManufacturerId, dto => dto.MapFrom(
-                    x => context.Manufacturers.FirstOrDefault(m => m.Name == x.Manufacturer).Id))
+                    x => _context.Manufacturers.FirstOrDefault(m => m.Name == x.Manufacturer).Id))
                 .ForMember(p => p.SupplierId, dto => dto.MapFrom(
-                    x => context.Suppliers.FirstOrDefault(m => m.Name == x.Supplier).Id));
+                    x => _context.Suppliers.FirstOrDefault(m => m.Name == x.Supplier).Id));
         }
     }
 }
