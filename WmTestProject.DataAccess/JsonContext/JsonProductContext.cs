@@ -21,9 +21,12 @@ namespace WmTestProject.DataAccess.JsonContext
         {
             var products = Read().ToList();
 
-            var exist = products.FirstOrDefault(x => x.Id == entity.Id) == null;
+            var exist = products.FirstOrDefault(x => x.Name == entity.Name);
+            var lastId = products[products.Count - 1].Id;
 
-            if (!exist)
+            entity.Id = lastId++;
+
+            if (exist == null)
             {
                 products.Add(entity);
             }

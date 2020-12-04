@@ -29,7 +29,7 @@ namespace WmTestProject.Web.Controllers
 
         public IActionResult Index(ProductSearchParams search)
         {
-            return View(_query.Execute(search));
+            return View(_jsonQuery.Execute(search));
         }
 
         [HttpGet]
