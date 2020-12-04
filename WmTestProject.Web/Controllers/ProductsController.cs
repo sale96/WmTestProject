@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using WmTestProject.Application.Queries.Categories;
 using WmTestProject.Application.Queries.Manufacturer;
 using WmTestProject.Application.Queries.Product;
+using WmTestProject.Application.Queries.Supplier;
 using WmTestProject.Application.Searches.Product;
 
 namespace WmTestProject.Web.Controllers
@@ -31,7 +32,8 @@ namespace WmTestProject.Web.Controllers
 
         public IActionResult Add(
             [FromServices] IGetCategoriesQuery categories,
-            [FromServices] IGetManufacturersQuery manufacturers)
+            [FromServices] IGetManufacturersQuery manufacturers,
+            [FromServices] IGetSuppliersQuery suppliers)
         {
             ViewBag.Categories = categories.Execute("").Select(x => new SelectListItem
             {
@@ -40,6 +42,12 @@ namespace WmTestProject.Web.Controllers
             });
 
             ViewBag.Manufacturers = manufacturers.Execute("").Select(x => new SelectListItem
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name.ToString()
+            });
+
+            ViewBag.Suppliers = suppliers.Execute("").Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
                 Text = x.Name.ToString()
