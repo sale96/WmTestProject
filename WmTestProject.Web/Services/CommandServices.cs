@@ -15,6 +15,7 @@ namespace WmTestProject.Web.Services
             // Entity Framework
             services.AddTransient<IAddProductCommand, AddProductCommand>();
             services.AddTransient<IUpdateProductCommand, UpdateProductCommand>();
+            services.AddTransient<IDeleteProductCommand, DeleteProductCommand>();
 
             //Json
             //services.AddTransient<IAddProductCommand, IAddProductJsonCommand>();

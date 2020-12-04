@@ -89,6 +89,14 @@ namespace WmTestProject.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Delete(
+            int id,
+            IDeleteProductCommand command)
+        {
+            command.Execute(id);
+            return RedirectToAction("Index");
+        }
+
         private void GenerateViewBags()
         {
             ViewBag.Categories = _categories.Execute("").Select(x => new SelectListItem
