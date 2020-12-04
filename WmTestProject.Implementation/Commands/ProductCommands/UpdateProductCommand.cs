@@ -28,17 +28,7 @@ namespace WmTestProject.Implementation.Commands.ProductCommands
 
         public void Execute(ProductDto request)
         {
-            var product = _context.Products.FirstOrDefault(x => x.Id == request.Id);
-
-            if (product == null)
-                throw new UnexistingEntityException();
-
-            product.CategoryId = _context.Categories.FirstOrDefault(x => x.Name == request.Category).Id;
-            product.ManufacturerId = _context.Manufacturers.FirstOrDefault(x => x.Name == request.Manufacturer).Id;
-            product.SupplierId = _context.Suppliers.FirstOrDefault(x => x.Name == request.Supplier).Id;
-            product.Name = request.Name;
-            product.Price = request.Price;
-            product.Description = request.Description;
+            var product = _mapper.Map<ProductDto, Product>(request);
 
             _context.Products.Update(product);
             _context.SaveChanges();
