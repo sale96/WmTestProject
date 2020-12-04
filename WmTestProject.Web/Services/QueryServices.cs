@@ -29,6 +29,7 @@ namespace WmTestProject.Web.Services
             services.AddTransient<IGetCategoriesQuery, GetCategoriesJsonQuery>();
             services.AddTransient<IGetManufacturersQuery, GetManufacturerJsonQuery>();
             services.AddTransient<IGetSuppliersQuery, GetSuppliersJsonQuery>();
+            services.AddTransient<IGetSingleProductQuery, GetSingleJsonProductQuery>();
 
             return services;
         }

@@ -74,5 +74,12 @@ namespace WmTestProject.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult Edit(
+            int id,
+            [FromServices] IGetSingleProductQuery query)
+        {
+            return View(query.Execute(id));
+        }
     }
 }
