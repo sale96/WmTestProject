@@ -38,6 +38,9 @@ namespace WmTestProject.Web
             });
 
             services.AddTransient<IJsonProductContext, JsonProductContext>();
+            services.AddTransient<IJsonCategoryContext, JsonCategoryContext>();
+            services.AddTransient<IJsonManufacturerContext, JsonManufacturerContext>();
+            services.AddTransient<IJsonSupplierContext, JsonSupplierContext>();
 
             services.AddAutoMapper(cfg =>
             {
