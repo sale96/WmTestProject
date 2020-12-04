@@ -12,6 +12,7 @@ namespace WmTestProject.Web.Services
         public static IServiceCollection RegisterValidators(this IServiceCollection services)
         {
             services.AddTransient<CreateProductValidation>();
+            services.AddTransient<CreateProductJsonValidation>();
 
             return services;
         }
