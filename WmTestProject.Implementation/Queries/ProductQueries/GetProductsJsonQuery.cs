@@ -8,6 +8,7 @@ using WmTestProject.Application.Searches;
 using WmTestProject.Application.Searches.Product;
 using WmTestProject.DataAccess;
 using WmTestProject.DataAccess.JsonContext.Interfaces.Implementations;
+using WmTestProject.Implementation.Utilities;
 
 namespace WmTestProject.Implementation.Queries.ProductQueries
 {
@@ -26,7 +27,7 @@ namespace WmTestProject.Implementation.Queries.ProductQueries
         {
             var data = _context.Read();
 
-            if (!(string.IsNullOrEmpty(search.Name) || string.IsNullOrWhiteSpace(search.Name)))
+            if (!search.Name.IsTotalyEmpty())
             {
                 data = data.Where(p => p.Name.Contains(search.Name));
             }
