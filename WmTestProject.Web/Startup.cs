@@ -13,6 +13,7 @@ using WmTestProject.Application;
 using WmTestProject.DataAccess;
 using WmTestProject.DataAccess.JsonContext;
 using WmTestProject.DataAccess.JsonContext.Interfaces.Implementations;
+using WmTestProject.Implementation.Loggers;
 using WmTestProject.Implementation.MappingProfiles;
 using WmTestProject.Web.Services;
 
@@ -49,6 +50,7 @@ namespace WmTestProject.Web
             });
 
             services.AddTransient<UseCaseExecutor>();
+            services.AddTransient<IApplicationLogger, ConsoleLogger>();
 
             services.RegisterQueries();
             services.RegisterCommands();
