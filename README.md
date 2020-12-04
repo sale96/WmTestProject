@@ -14,9 +14,5 @@ There are two types of data (from the database and from JSON) both implement the
 - EntityFramework Core
 - FluentValidation
 - AutoMapper
-
-### Architecture
-- Domain driven desing
-
 ### Patterns
 - CQRS
