@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WmTestProject.Application;
 using WmTestProject.DataAccess;
 using WmTestProject.DataAccess.JsonContext;
 using WmTestProject.DataAccess.JsonContext.Interfaces.Implementations;
@@ -46,6 +47,8 @@ namespace WmTestProject.Web
             {
                 cfg.AddProfile<ProductProfile>();
             });
+
+            services.AddTransient<UseCaseExecutor>();
 
             services.RegisterQueries();
             services.RegisterCommands();
