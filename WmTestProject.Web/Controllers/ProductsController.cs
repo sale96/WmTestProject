@@ -73,6 +73,22 @@ namespace WmTestProject.Web.Controllers
             return View(query.Execute(id));
         }
 
+        [HttpPost]
+        public IActionResult Edit(
+            ProductDto product,
+            [FromServices] IUpdateProductCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Model error");
+                GenerateViewBags();
+                return View(product);
+            }
+
+            command.Execute(product);
+            return RedirectToAction("Index");
+        }
+
         private void GenerateViewBags()
         {
             ViewBag.Categories = _categories.Execute("").Select(x => new SelectListItem

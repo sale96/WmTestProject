@@ -35,7 +35,16 @@ namespace WmTestProject.Implementation.Commands.ProductCommands
         {
             _productValidation.ValidateAndThrow(request);
 
-            var product = _mapper.Map<ProductDto, Product>(request);
+            var product = new Product
+            {
+                Name = request.Name,
+                Id = request.Id,
+                Price = request.Price,
+                Description = request.Description,
+                CategoryId = _context.Categories.FirstOrDefault(x => x.Name == request.Category).Id,
+                ManufacturerId = _context.Manufacturers.FirstOrDefault(x => x.Name == request.Manufacturer).Id,
+                SupplierId = _context.Suppliers.FirstOrDefault(x => x.Name == request.Supplier).Id,
+            };
 
             _context.Products.Update(product);
             _context.SaveChanges();

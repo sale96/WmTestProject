@@ -13,10 +13,11 @@ namespace WmTestProject.Web.Services
         public static IServiceCollection RegisterCommands(this IServiceCollection services)
         {
             // Entity Framework
-            //services.AddTransient<IAddProductCommand, AddProductCommand>();
+            services.AddTransient<IAddProductCommand, AddProductCommand>();
+            services.AddTransient<IUpdateProductCommand, UpdateProductCommand>();
 
             //Json
-            services.AddTransient<IAddProductCommand, IAddProductJsonCommand>();
+            //services.AddTransient<IAddProductCommand, IAddProductJsonCommand>();
             return services;
         }
     }
