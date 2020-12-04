@@ -17,6 +17,13 @@ namespace WmTestProject.DataAccess.JsonContext
             return base.Read().Products;
         }
 
+        public ProductDto ReadSingle(int id)
+        {
+            var products = Read();
+
+            return products.FirstOrDefault(x => x.Id == id);
+        }
+
         public void Write(ProductDto entity)
         {
             var products = Read().ToList();
