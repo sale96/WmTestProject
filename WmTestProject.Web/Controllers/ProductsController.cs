@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using WmTestProject.Application;
 using WmTestProject.Application.Commands.Product;
 using WmTestProject.Application.Dto;
 using WmTestProject.Application.Queries.Categories;
@@ -16,6 +17,7 @@ namespace WmTestProject.Web.Controllers
 {
     public class ProductsController : Controller
     {
+        private readonly UseCaseExecutor _executor;
         private readonly IGetProductsQuery _query;
         private readonly IGetProductsJsonQuery _jsonQuery;
         private readonly IGetCategoriesQuery _categories;
@@ -23,12 +25,14 @@ namespace WmTestProject.Web.Controllers
         private readonly IGetSuppliersQuery _suppliers;
 
         public ProductsController(
+            UseCaseExecutor executor,
             IGetProductsQuery query,
             IGetProductsJsonQuery jsonQuery,
             IGetCategoriesQuery categories,
             IGetManufacturersQuery manufacturers,
             IGetSuppliersQuery suppliers)
         {
+            _executor = executor;
             _query = query;
             _jsonQuery = jsonQuery;
             _categories = categories;
@@ -38,7 +42,7 @@ namespace WmTestProject.Web.Controllers
 
         public IActionResult Index(ProductSearchParams search)
         {
-            return View(_query.Execute(search));
+            return View(_executor.ExecuteQuery(_query, search));
         }
 
         [HttpGet]
@@ -60,7 +64,7 @@ namespace WmTestProject.Web.Controllers
                 return View(product);
             }
 
-            command.Execute(product);
+            _executor.ExecuteCommand(command, product);
 
             return RedirectToAction("Index");
         }
@@ -70,7 +74,8 @@ namespace WmTestProject.Web.Controllers
             [FromServices] IGetSingleProductQuery query)
         {
             GenerateViewBags();
-            return View(query.Execute(id));
+
+            return View(_executor.ExecuteQuery(query, id));
         }
 
         [HttpPost]
@@ -85,7 +90,7 @@ namespace WmTestProject.Web.Controllers
                 return View(product);
             }
 
-            command.Execute(product);
+            _executor.ExecuteCommand(command, product);
             return RedirectToAction("Index");
         }
 
@@ -93,25 +98,26 @@ namespace WmTestProject.Web.Controllers
             int id,
             [FromServices] IDeleteProductCommand command)
         {
-            command.Execute(id);
+            _executor.ExecuteCommand(command, id);
             return RedirectToAction("Index");
         }
 
         private void GenerateViewBags()
         {
-            ViewBag.Categories = _categories.Execute("").Select(x => new SelectListItem
+
+            ViewBag.Categories = _executor.ExecuteQuery(_categories, "").Select(x => new SelectListItem
             {
                 Value = x.Name,
                 Text = x.Name
             });
 
-            ViewBag.Manufacturers = _manufacturers.Execute("").Select(x => new SelectListItem
+            ViewBag.Manufacturers = _executor.ExecuteQuery(_manufacturers, "").Select(x => new SelectListItem
             {
                 Value = x.Name,
                 Text = x.Name
             });
 
-            ViewBag.Suppliers = _suppliers.Execute("").Select(x => new SelectListItem
+            ViewBag.Suppliers = _executor.ExecuteQuery(_suppliers, "").Select(x => new SelectListItem
             {
                 Value = x.Name,
                 Text = x.Name
