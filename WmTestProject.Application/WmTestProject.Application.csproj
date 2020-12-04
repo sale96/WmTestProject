@@ -4,4 +4,12 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\Categories\" />
+    <Folder Include="Commands\Manufacturer\" />
+    <Folder Include="Commands\Supplier\" />
+    <Folder Include="Queries\Manufacturer\" />
+    <Folder Include="Queries\Supplier\" />
+  </ItemGroup>
+
 </Project>
