@@ -24,7 +24,7 @@ namespace WmTestProject.DataAccess.JsonContext
             var exist = products.FirstOrDefault(x => x.Name == entity.Name);
             var lastId = products[products.Count - 1].Id;
 
-            entity.Id = lastId++;
+            entity.Id = ++lastId;
 
             if (exist == null)
             {
