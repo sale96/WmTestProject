@@ -24,6 +24,29 @@ namespace WmTestProject.DataAccess.JsonContext
             return products.FirstOrDefault(x => x.Id == id);
         }
 
+        public void Update(ProductDto entity)
+        {
+            var data = base.Read();
+            var products = Read().ToList();
+
+            foreach (var product in products)
+            {
+                if (product.Id == entity.Id)
+                {
+                    product.Name = entity.Name;
+                    product.Description = entity.Description;
+                    product.Price = entity.Price;
+                    product.Category = entity.Category;
+                    product.Manufacturer = entity.Manufacturer;
+                    product.Supplier = entity.Supplier;
+                }
+            }
+
+            data.Products = products;
+            var fileData = JsonConvert.SerializeObject(data);
+            File.WriteAllText(file, fileData);
+        }
+
         public void Write(ProductDto entity)
         {
             var products = Read().ToList();

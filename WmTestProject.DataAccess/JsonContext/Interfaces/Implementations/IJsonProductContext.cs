@@ -5,7 +5,11 @@ using WmTestProject.Application.Dto;
 
 namespace WmTestProject.DataAccess.JsonContext.Interfaces.Implementations
 {
-    public interface IJsonProductContext : IJsonContextRead<IEnumerable<ProductDto>>, IJsonContextWrite<ProductDto>, IJsonContextReadSingle<ProductDto>
+    public interface IJsonProductContext :
+        IJsonContextRead<IEnumerable<ProductDto>>,
+        IJsonContextWrite<ProductDto>,
+        IJsonContextReadSingle<ProductDto>,
+        IJsonContextUpdate<ProductDto>
     {
     }
 }
