@@ -91,7 +91,7 @@ namespace WmTestProject.Web.Controllers
 
         public IActionResult Delete(
             int id,
-            IDeleteProductCommand command)
+            [FromServices] IDeleteProductCommand command)
         {
             command.Execute(id);
             return RedirectToAction("Index");
