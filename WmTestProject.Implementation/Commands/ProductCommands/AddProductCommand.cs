@@ -28,27 +28,30 @@ namespace WmTestProject.Implementation.Commands.ProductCommands
 
         public void Execute(ProductDto request)
         {
-            var category = _context.Categories.FirstOrDefault(x => x.Name == request.Category);
-            var manufacturer = _context.Manufacturers.FirstOrDefault(x => x.Name == request.Manufacturer);
-            var supplier = _context.Suppliers.FirstOrDefault(x => x.Name == request.Supplier);
+            var category = _context.Categories.FirstOrDefault(x => x.Name.ToLower() == request.Category.ToLower());
+            var manufacturer = _context.Manufacturers.FirstOrDefault(x => x.Name.ToLower() == request.Manufacturer.ToLower());
+            var supplier = _context.Suppliers.FirstOrDefault(x => x.Name.ToLower() == request.Supplier.ToLower());
 
-            var areNull = (category == null) || (manufacturer == null) || (supplier == null);
+            if (category == null)
+                throw new ArgumentException("Category fail");
+            if (manufacturer == null)
+                throw new ArgumentException("Manufacturer fail");
+            if (supplier == null)
+                throw new ArgumentException("Supplier fail");
 
-            if (!areNull)
+            var product = new Product
             {
-                var product = new Product
-                {
-                    Name = request.Name,
-                    Description = request.Description,
-                    Price = request.Price,
-                    CategoryId = category.Id,
-                    ManufacturerId = manufacturer.Id,
-                    SupplierId = supplier.Id
-                };
+                Name = request.Name,
+                Description = request.Description,
+                Price = request.Price,
+                CategoryId = category.Id,
+                ManufacturerId = manufacturer.Id,
+                SupplierId = supplier.Id
+            };
 
-                _context.Products.Add(product);
-                _context.SaveChanges();
-            }
+            _context.Products.Add(product);
+            _context.SaveChanges();
+
         }
     }
 }

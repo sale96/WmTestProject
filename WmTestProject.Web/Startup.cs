@@ -45,6 +45,7 @@ namespace WmTestProject.Web
             });
 
             services.RegisterQueries();
+            services.RegisterCommands();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

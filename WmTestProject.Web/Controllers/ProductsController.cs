@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using WmTestProject.Application.Commands.Product;
+using WmTestProject.Application.Dto;
 using WmTestProject.Application.Queries.Categories;
 using WmTestProject.Application.Queries.Manufacturer;
 using WmTestProject.Application.Queries.Product;
@@ -27,9 +29,10 @@ namespace WmTestProject.Web.Controllers
 
         public IActionResult Index(ProductSearchParams search)
         {
-            return View(_jsonQuery.Execute(search));
+            return View(_query.Execute(search));
         }
 
+        [HttpGet]
         public IActionResult Add(
             [FromServices] IGetCategoriesQuery categories,
             [FromServices] IGetManufacturersQuery manufacturers,
@@ -37,23 +40,39 @@ namespace WmTestProject.Web.Controllers
         {
             ViewBag.Categories = categories.Execute("").Select(x => new SelectListItem
             {
-                Value = x.Id.ToString(),
-                Text = x.Name.ToString()
+                Value = x.Name,
+                Text = x.Name
             });
 
             ViewBag.Manufacturers = manufacturers.Execute("").Select(x => new SelectListItem
             {
-                Value = x.Id.ToString(),
-                Text = x.Name.ToString()
+                Value = x.Name,
+                Text = x.Name
             });
 
             ViewBag.Suppliers = suppliers.Execute("").Select(x => new SelectListItem
             {
-                Value = x.Id.ToString(),
-                Text = x.Name.ToString()
+                Value = x.Name,
+                Text = x.Name
             });
 
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(
+            ProductDto product,
+            [FromServices] IAddProductCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Error in the model");
+                return View(product);
+            }
+
+            command.Execute(product);
+
+            return RedirectToAction("Index");
         }
     }
 }

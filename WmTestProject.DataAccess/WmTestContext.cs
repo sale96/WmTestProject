@@ -32,11 +32,11 @@ namespace WmTestProject.DataAccess
                     switch (entry.State)
                     {
                         case EntityState.Modified:
-                            e.CreatedAt = DateTime.Now;
-                            e.UpdatedAt = null;
+                            e.UpdatedAt = DateTime.Now;
                             break;
                         case EntityState.Added:
-                            e.UpdatedAt = DateTime.Now;
+                            e.CreatedAt = DateTime.Now;
+                            e.UpdatedAt = null;
                             break;
                     }
                 }
